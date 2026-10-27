@@ -7,3 +7,5 @@
 炸彈上就會顯示綠燈，並且紅燈跟蜂鳴器停止運作
 並且警方如果手上有鉗子，拆除時間會更短
 如果沒有鉗子，拆除時間是10秒，反之5秒
+STM32_Mid_Project\Picture
+![圖片描述](STM32_Mid_Project\Picture\C4.png)
