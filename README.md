@@ -148,11 +148,11 @@ Counter Period 設定為999
 如果有可以讓拆除時間減少5秒   
 ![step8-3-4](Picture/Execute12.png)    
 8-3-5.在按下按鈕後，會進行拆除炸彈動作，綠燈會逐漸亮起   
-(黃燈亮起時拆除時間為5秒，反之10秒)   
-![step8-3-5](Picture/Execute13.png)   
-8-3-6.拆除完畢後，紅燈及蜂鳴器停止運作，綠燈常亮   
-並且向CMD傳送“Defuse Successful”
-![step8-3-6](Picture/Execute14.png)   
+(黃燈亮起時拆除時間為5秒，反之10秒)    
+![step8-3-5](Picture/Execute13.png)    
+8-3-6.拆除完畢後，紅燈及蜂鳴器停止運作，綠燈常亮     
+並且向CMD傳送“Defuse Successful”      
+![step8-3-6](Picture/Execute14.png)     
 ##    9.AI使用說明   
 
 
