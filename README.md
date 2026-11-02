@@ -28,14 +28,17 @@
 9.(CMD python -m serial.tools.miniterm --echo COM(你的port號) 115200)  
 ![MX示意圖](Picture/MX_Pin_Set.png)  
 ##    3.驗收條件與結果  
-1.打開CMD -> Pyserial 輸入7355608 | 紅燈、蜂鳴器呼吸閃爍並倒數 ☑  
-2.在Pyserial 輸入CUT | 黃燈亮起 ☑  
-3.按下按鈕 | 進入拆除動作 綠燈開始作為進度條亮起 ☑  
-4.拆除過程 | 如果有CUT 拆除時間為5秒，如果沒有為10秒 ☑  
-5.拆除完畢 | 綠燈常亮，紅燈及蜂鳴器停止 ☑  
-6.炸彈爆炸 | 綠燈關閉，紅燈及蜂鳴器常開 ☑  
-7.炸彈爆炸後按按鈕 | 不會有反應，炸彈爆炸後無法拆除 ☑  
-8.拆除炸彈後輸入7355608 | 會重新啟動炸彈 ☑  
+1.打開CMD -> Pyserial 執行程式時出現”Hello World” ☑    
+2.在Pyserial 輸入7355608 | 紅燈、蜂鳴器呼吸閃爍並倒數 ☑    
+3.在Pyserial 輸入CUT | 黃燈亮起 ☑    
+4.按下按鈕 | 進入拆除動作 綠燈開始作為進度條亮起 ☑    
+5.拆除過程 | 如果有CUT 拆除時間為5秒，如果沒有為10秒 ☑   
+6.拆除完畢 | 綠燈常亮，紅燈及蜂鳴器停止 ☑    
+7.拆除完畢 | CMD出現 “Defuse successful” ☑   
+8.炸彈爆炸 | 綠燈關閉，紅燈及蜂鳴器常開 ☑    
+9.炸彈爆炸 | CMD出現 “Booooom”☑   
+10.炸彈爆炸後按按鈕 | 不會有反應，炸彈爆炸後無法拆除 ☑   
+11.拆除炸彈後輸入7355608 | 會重新啟動炸彈 ☑   
 ![MX示意圖](Picture/Example.jpg)  
 ##    4.C4技術應用勾選表  
 ☑GPIO輸出 黃燈PC6 MODE=01 判斷是否有鉗子  
@@ -49,12 +52,13 @@
 ☐優先權與巢狀 無  
 ☑軟體去彈跳 按下按鈕拆炸彈時不會誤動作  
   
-☐UART 傳送	   
-☑UART 接收+環形緩衝 接收7355608 與 CUT  
-LPUART1 115200 8N1  
-☑Pyserial 在CMD裡面輸入文字傳送給STM32  
-python -m serial.tools.miniterm - - echo  
-COM10 115200  
+☑UART 傳送	 傳送Hello world、Bomb SET     
+Booom、 Defuse successful來表達目前C4的狀態 	    
+☑UART 接收+環形緩衝 接收7355608 與 CUT    
+LPUART1 115200 8N1     
+☑Pyserial 在CMD裡面輸入文字傳送給STM32    
+python -m serial.tools.miniterm - - echo   
+COM10 115200    
   
 ☐Timer 定時中斷  
 ☑PWM timer3 PSC169 ARR999 1000Hz  
@@ -66,8 +70,8 @@ TIM3_CH3 PC8 紅燈 安裝炸彈後閃爍使用
 TIM3_CH4 PC9 蜂鳴器 安裝炸彈後鳴叫使用  
 GPIO_EXTI11 PA11 按鈕 拆除炸彈時使用  
 GPIO_Output PC6 黃燈 判斷是否擁有CUT  
-LPUART1_TX_STLINKV3E_VCP_RX PA2 接收給STM32 主機傳輸訊息用  
-LPUART1_TX_STLINKV3E_VCP_TX PA2 傳輸給主機 主機接收訊息用  
+LPUART1_TX_STLINKV3E_VCP_RX PA2 接收給STM32 主機傳輸訊息用    
+LPUART1_TX_STLINKV3E_VCP_TX PA2 傳輸給主機 主機接收訊息用    
 ##    6.建置與執行  
 **開發環境**：STM32CubeIDE  
 **燒錄步驟**：開啟專案 → 點擊 Build (鎚子圖示) → 點擊 Run / Debug 燒錄至 NUCLEO-G474RE。  
@@ -77,7 +81,17 @@ LPUART1_TX_STLINKV3E_VCP_TX PA2 傳輸給主機 主機接收訊息用
     * `7355608`：啟動拆彈倒數與呼吸燈、蜂鳴器。  
     * `CUT`：執行剪線加速指令。  
 ##    7.程式結構  
-(考試那天記得做)  
+
+
+
+
+
+(考試那天記得做)  ---------------------------------------
+
+
+
+
+
 ##    8.實作照片與講解  
 ###    8-1.MX設定  
 8-1-1.打開STM32CubeMX 設定以下腳位：  
@@ -115,16 +129,21 @@ Counter Period 設定為999
 黃框為GPIO_Output，提供給麵包版上的黃燈使用  
 ![step8-2-3](Picture/Execute8.png)  
 ###    8-3實機操作  
-8-3-1.將程式燒錄進STM32後，打開電腦的“裝置管理員”  
+8-3-1.將程式燒錄進STM32前，打開電腦的“裝置管理員”  
 查看下方的連接埠，確認自己的STM32在COM幾(此裝置為COM10)  
 ![step8-3-1](Picture/Execute9.png)  
 8-3-2.打開“CMD”後輸入以下字元用來搭建通訊連接  
 “python –m serial.tools.miniterm --echo COM10 115200”  
 ![step8-3-2](Picture/Execute10.png)  
-8-3-3.在CMD內輸入7355608後 可以看見紅燈及蜂鳴器開始閃爍  
-到計時，如果到時間結束還是沒有拆除成功，   
-紅燈及蜂鳴器會呈現常亮，不會再進行呼吸閃爍   
+8-3-2-補充.程式執行後，一開始會向 CMD 傳送“Hello World”     
+表示目前已經在程式內    
+![step8-3-2](Picture/Execute10-1.png)    
+8-3-3.在CMD內輸入7355608後 可以看見紅燈及蜂鳴器開始閃爍   
+到計時，如果到時間結束還是沒有拆除成功，     
+紅燈及蜂鳴器會呈現常亮，不會再進行呼吸閃爍     
 ![step8-3-3](Picture/Execute11.png)   
+8-3-3-補充.如果一段時間內沒有拆除炸彈，則紅燈及蜂鳴器停止閃爍直接常亮，並且往 CMD傳送“Boooooom”      
+![step8-3-3](Picture/Execute11-1.png)   
 8-3-4.在CMD內輸入CUT後 可以看見黃燈亮起，判斷是否有鉗子   
 如果有可以讓拆除時間減少5秒   
 ![step8-3-4](Picture/Execute12.png)    
@@ -132,8 +151,18 @@ Counter Period 設定為999
 (黃燈亮起時拆除時間為5秒，反之10秒)   
 ![step8-3-5](Picture/Execute13.png)   
 8-3-6.拆除完畢後，紅燈及蜂鳴器停止運作，綠燈常亮   
+並且向CMD傳送“Defuse Successful”
 ![step8-3-6](Picture/Execute14.png)   
 ##    9.AI使用說明   
+
+
+
+
+當天加入------------------------------------------------------   
+
+
+
 ##    10.已知限制  
-因為本次實作與實際上依然相差甚大，例如C4炸彈 主要成分為RDX旋風炸藥 、 而我們需要透過電流讓雷管通電，引爆內部的初級炸藥
-而雷管爆炸釋放的高溫與高壓衝擊波，
+因為本次實作與實際上依然相差甚大，例如C4炸彈 主要成分為RDX旋風炸藥 、 而我們需要透過電流讓雷管通電，引爆內部的初級炸藥    
+而雷管爆炸釋放的高溫與高壓衝擊波，這個能量會瞬間激化C4核心的RDX，引發連鎖反應產生爆炸。
+因此我們要額外增加一個電雷管、起爆器，當倒數完畢後啟動起爆器，進而引爆C4。    
