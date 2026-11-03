@@ -90,16 +90,18 @@ LPUART1_TX_STLINKV3E_VCP_TX PA2 傳輸給主機 主機接收訊息用
 這段 while 迴圈會去檢查緩衝區是否有新資料（rx_tail != rx_head），並將其逐一取出  
 組合成 Line Buffer：取出的字元會被暫存在 line_buffer 內，直到遇到換行符號（\n或\r）。
 ![step7-3](Picture/code3.png)  
-user code3內的程式 當輸入7355608 使C4_SET=1的時候 就開始進行倒計時  
+7-4 user code3內的程式   
+當輸入7355608 使C4_SET=1的時候 就開始進行倒計時  
 讓紅燈、蜂鳴器開始呼吸運作  
 當炸彈越接近爆炸時 呼吸的頻率會越快  
 ![step7-4](Picture/code4.png) 
-user code3內的程式 當按下按鈕時就會開始判斷是否處於拆除炸彈狀態，如果擁有鉗子 拆除時間減半(5秒)  
+7-5 user code3內的程式    
+當按下按鈕時就會開始判斷是否處於拆除炸彈狀態，如果擁有鉗子 拆除時間減半(5秒)  
 如果拆除成功 就會結束程式 並且讓綠燈常亮("發送Defuse Sueecssful")  
 如果沒有在時間內拆除完畢，就拆除失敗爆炸，紅燈及蜂鳴器常亮("發送Booooooom")  
 但如果拆除到一半放開，就會作為未拆除成功，炸彈仍繼續倒數。    
 ![step7-5](Picture/code5.png) 
-UART 接收中斷 (HAL_UART_RxCpltCallback)：自動接收序列埠傳入的每個字元，並存入環形緩衝區   
+7-6 UART 接收中斷 (HAL_UART_RxCpltCallback)：自動接收序列埠傳入的每個字元，並存入環形緩衝區   
 外部按鈕中斷 (HAL_GPIO_EXTI_Callback)：偵測 PA11 拆彈按鈕的按下動作，觸發拆彈旗標   
 指令解析 (parse_command)：判斷接收到的指令，輸入 "7355608" 會啟動 C4 倒數，輸入 "CUT" 則會取得拆彈鉗並點亮黃燈  
 ![step7-6](Picture/code6.png) 
