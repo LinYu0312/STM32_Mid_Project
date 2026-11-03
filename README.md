@@ -179,7 +179,7 @@ Counter Period 設定為999
 ![step9-4](Picture/AI4.png) 
 ![step9-5](Picture/AI5.png) 
 ![step9-6](Picture/AI6.png) 
-9-7.最後是功能說明
+9-7.最後是功能說明  
 ![step9-7](Picture/AI7.png)     
 ##    10.已知限制  
 因為本次實作與實際上依然相差甚大，例如C4炸彈 主要成分為RDX旋風炸藥 、 而我們需要透過電流讓雷管通電，引爆內部的初級炸藥    
