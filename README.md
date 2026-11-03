@@ -174,7 +174,7 @@ Counter Period 設定為999
 首先AI先與我確認 STM32CubeMX 硬體腳位與週邊設定  
 ![step9-2](Picture/AI2.png)  
 9-3.接下來都是AI幫我生成的CODE  
-根據我的需求擷取我需要的Code移置到我的專案內
+根據我的需求擷取我需要的Code移置到我的專案內    
 ![step9-3](Picture/AI3.png)  
 ![step9-4](Picture/AI4.png) 
 ![step9-5](Picture/AI5.png) 
