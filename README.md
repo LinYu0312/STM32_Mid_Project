@@ -175,12 +175,12 @@ Counter Period 設定為999
 ![step9-2](Picture/AI2.png)  
 9-3.接下來都是AI幫我生成的CODE  
 根據我的需求擷取我需要的Code移置到我的專案內    
-![step9-3](Picture/AI3.png)  
-![step9-4](Picture/AI4.png) 
-![step9-5](Picture/AI5.png) 
-![step9-6](Picture/AI6.png) 
+![step9-3](Picture/AI3.png)   
+![step9-4](Picture/AI4.png)  
+![step9-5](Picture/AI5.png)  
+![step9-6](Picture/AI6.png)  
 9-7.最後是功能說明  
-![step9-7](Picture/AI7.png)     
+![step9-7](Picture/AI7.png)      
 ##    10.已知限制  
 因為本次實作與實際上依然相差甚大，例如C4炸彈 主要成分為RDX旋風炸藥 、 而我們需要透過電流讓雷管通電，引爆內部的初級炸藥    
 而雷管爆炸釋放的高溫與高壓衝擊波，這個能量會瞬間激化C4核心的RDX，引發連鎖反應產生爆炸。
